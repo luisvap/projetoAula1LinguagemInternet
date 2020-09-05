@@ -5,18 +5,38 @@ package br.uniso;
 // e processa pra devolver uma resposta
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 
 @RestController
 public class UnisoController {
 
+
+    private ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+
+    @PostMapping("/criarAluno")
+    public boolean criarAluno(@RequestBody Aluno aluno){
+
+        alunos.add(aluno);
+        return true;
+    }
+
+
     @GetMapping("/hello")
     public String hello(@RequestParam("nome") String xxx, @RequestParam("idade") String yyyy){
 
         return "Hello " + xxx + " idade de " + yyyy;
+    }
+
+    @GetMapping("/alunos")
+    public ArrayList<Aluno> getAlunos(){
+
+
+
+        return alunos;
+
     }
 
 }
